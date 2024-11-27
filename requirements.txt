@@ -1,1 +1,10 @@
 streamlit
+google-cloud-bigquery
+google-api-core
+googlemaps
+numpy
+pandas
+scikit-learn
+plotly
+geopy
+db-dtypes
