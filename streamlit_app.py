@@ -1,14 +1,12 @@
 import streamlit as st
 from google.cloud import bigquery
 from google.api_core.exceptions import GoogleAPICallError
-import json
 import os
 import googlemaps
 import numpy as np
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import MinMaxScaler
-import random
 import plotly.express as px
 import plotly.graph_objects as go
 from geopy.distance import geodesic
@@ -171,7 +169,7 @@ if st.button("Run ML"):
     # ---------------- K-Mean and Process Log ----------------
     cust_lo_df, adjustment_logs = cluster_by_zone(cust_lo_df, zone_clusters)
     # st.dataframe(cust_lo_df)
-    
+
     for log in adjustment_logs:
         st.write(f"Log: {log}")
 
