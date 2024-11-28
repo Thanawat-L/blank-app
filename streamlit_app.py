@@ -207,8 +207,10 @@ if "cust_lo_df" in st.session_state and st.session_state.query_run == True:
     # กรองข้อมูลตามตัวเลือกใน Dropdown
     if selected_zone == 'All':
         df = cust_lo_df.copy()
+        sales_filtered = sales_df.copy()
     else:
         df = cust_lo_df[cust_lo_df['zoneId'] == selected_zone].copy()
+        sales_filtered = sales_df[sales_df['zoneId'].astype(str) == selected_zone]
     
     cluster_summary = df.groupby('Cluster', group_keys=False).apply(calculate_cluster_info).reset_index()
     
@@ -274,8 +276,10 @@ if "cust_lo_df" in st.session_state and st.session_state.query_run == True:
         coloraxis_showscale=False  # ปิดการแสดงผลของ Heatmap
     )
 
-    # แสดงผลใน Streamlit
-    st.title("Clusters Visualization with Mapbox")
+    # Display on Streamlit
+    st.title("K-Mean Clustering Visualization")
     st.plotly_chart(fig, use_container_width=True)
-
-
+    st.write("Customer dataframe")
+    st.dataframe(df.loc[:, ['BranchID', 'BranchName', 'province_name_eng', 'zoneId', 'distance', 'duration', 'Cluster']])
+    st.write("Sale dataframe")
+    st.dataframe(sales_filtered.loc[:, ['sales_id', 'salesperson_name', 'zoneId']])
